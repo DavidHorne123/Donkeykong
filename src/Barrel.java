@@ -7,38 +7,35 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 
 
-public class barrel{
+public class Barrel{
 	
 	private int x,y; // position of the bird
-	private double vx, vy; // for movement
+	private double vx=2, vy; // for movement
 	int count;
 	private Image img; 	
 	private AffineTransform tx;
+	private double ay;
+	private boolean onPlatform;
+	private ArrayList<Level> platforms;
 
 
-	public barrel() {
+	public Barrel(ArrayList<Level> platforms) {
 		img = getImage("/imgs/barrel.png"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(getX(), getY());
 		init(getX(), getY()); 				//initialize the location of the image
 									//use your variables
-		while(getVx() == 0) {
-			vx += 2;
-		}
-		
-		while(getVy() == 0) {
-			vy += 2;
-		}
-		
+		this.platforms = platforms;
 	
 	}
 	
 	//include a constructor that allows the specifying the file name
 	// of the image
-	public barrel(String fileName) {
+	public Barrel(String fileName) {
 		img = getImage("/imgs/"+fileName); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(getX(), getY());
 		init(getX(), getY()); 				//initialize the location of the image
@@ -61,38 +58,61 @@ public class barrel{
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
-	
-		setX((int) (getX()+ getVx()));
-		setY((int) (getY()+ getVy()));
+		/* check for platform collisions which determins if we're moving down */
+		int count = 0;
+		for( Level level : platforms ) {
+			
+			if(level.hitbox().intersects(this.hitBox()) && vy >= 0 ) {
+				ay = 0;
+				vy = 0;
+				onPlatform = true;
+				System.out.println("on platform");
+				count++;
+				break;
+			 
+			}
+			
+		}
 		
+		if(count==0) {
+			ay = 1;	
+			vy += ay; //acceleration affects velocity
+			y += vy;
+		}
+		
+
+		x += vx;
 	
-		// call update to update the actual picture location
-		update();
+		// make certain coordinates so when mario hits it, he bounces back up
+		// increase velocity y bdy 1
+		// set velocity y to 25daa
+		init(x, y);
 		g2.drawImage(img, tx, null);
-		
-		
-
-		
-		
-
+		g2.drawRect(x+25,y+25, 50, 50);
 
 	}
 	
+	private Rectangle hitBox() {
+		// TODO Auto-generated method stub
+		return new Rectangle(x+25,y+25, 50, 50);
+
+	}
+
 	private void update() {
 		tx.setToTranslation(getX(), getY());
-		tx.scale(2.5 , 2.5);
+		tx.scale(3 ,3);
 	}
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(1, 1);
+		tx.scale(1,1);
 	}
 
 
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
-			URL imageURL = barrel.class.getResource(path);
+			URL imageURL = Barrel.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();

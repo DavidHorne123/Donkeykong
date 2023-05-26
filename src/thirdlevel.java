@@ -10,15 +10,15 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 
-public class fourthlevel extends Level {
+public class thirdlevel extends Level{
 
 	
 	//add the no-argument (zero parameters) constructor)
 	
-	public fourthlevel(){
+	public thirdlevel(){
 		img = getImage("/imgs/level.png"); //load the image for Tree
-		x = -125; // possition for left side floor
-		y = 550;
+		x = 125; // possition for left side floor
+		y = 700;
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x,y);
 	}
@@ -26,7 +26,7 @@ public class fourthlevel extends Level {
  
 	
 	
-	
+
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
@@ -36,7 +36,7 @@ public class fourthlevel extends Level {
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
-			URL imageURL = fourthlevel.class.getResource(path);
+			URL imageURL = thirdlevel.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();

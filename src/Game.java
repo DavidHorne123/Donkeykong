@@ -1,19 +1,12 @@
 import java.awt.Color;
 
 
-import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -24,38 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Game extends JPanel implements KeyListener, MouseListener, ActionListener{
-	Mario m = new Mario(); //Mario
-	Background bigFrame = new Background();
-	//Duck duck = new Duck();
-	PrincessPeach p = new PrincessPeach(); //Princess Peach
-	DonkeyKongg d = new DonkeyKongg(); // Donkey Kong
-	Ladder L = new Ladder(); //the ladders that allows Mario to advance
-	Ladder L2 = new Ladder();
-	barrel ba = new barrel(); // the barrels that try to kill Mario
-	firstlevel firstlevel = new firstlevel();
-	secondlevel secondlevel = new secondlevel();
-	fourthlevel fourthlevel = new fourthlevel();
-	private String img;
-	
-	public void paint(Graphics g) {
-		super.paintComponent(g);
-		bigFrame.paint(g); //painging the giant background
-		L.paint(g);; //the ladder
-		d.paint(g); //painting donkey kong
-		p.paint(g);
-		m.paint(g); //painting mario
-		ba.paint(g); //painting Donkey Kong
-		firstlevel.paint(g); //painting the first platform
-		secondlevel.paint(g);
-		fourthlevel.paint(g);
-		//duck.paint(g);
-		//System.out.println("here");
-		Point mouse;
-		Rectangle m = new Rectangle();
-		Rectangle d = new Rectangle(getX()+70, getY()+70, 190, 190);
-		
-	}
-	
 	int score = 0; //created score variable
 	int highscore = 0; //created highscore variable which should go at the top middle of the screen
 	int Lives = 10; //Mario has lives
@@ -78,27 +39,55 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	public boolean right = false;
 	boolean gamestart = false;
 	
+	
+	Mario m;
+	//Background bigFrame = new Background();
+	//Duck duck = new Duck();
+	PrincessPeach p = new PrincessPeach(); //Princess Peach
+	DonkeyKongg d = new DonkeyKongg(); // Donkey Kong
+	Ladder L = new Ladder(800, 845); //the ladders that allows Mario to advancew
+	Ladder L2 = new Ladder(100, 730);
+	//Ladder L2 = new Ladder();
+	Barrel ba;
+	firstlevel firstlevel = new firstlevel();
+	secondlevel secondlevel = new secondlevel();
+	fourthlevel fourthlevel = new fourthlevel();
+	thirdlevel thirdlevel = new thirdlevel();
+	fifthlevel fifthlevel = new fifthlevel();
+	toplevel toplevel = new toplevel();
+	
+	ArrayList<Level> platforms;
+	private String img;
+	
+	public void paint(Graphics g) {
+		super.paintComponent(g);
+		//bigFrame.paint(g); //painging the giant background
+	
+		d.paint(g); //painting donkey kong
+		p.paint(g);
+		m.paint(g); //painting mario
+		ba.paint(g); //painting Donkey Kong
+		
+		firstlevel.paint(g); //painting the first platform
+		secondlevel.paint(g);
+		fourthlevel.paint(g);
+		thirdlevel.paint(g);
+		fifthlevel.paint(g);
+		toplevel.paint(g);
+		L.paint(g); //the ladder
+		L2.paint(g);
+
+		
+	}
+	
+
+	
+	
 	public static void main(String[] arg) {
 		Game g = new Game();
 	}
 	
-	int x = 0, y = 0; //initializing variables x and y in game class
-	
-	public void update() {
-		y += velY; //updates y velocity
-		x += velX; //updates x velocity
-		
-	}
-	//if(m.getx() > 945 || getx() < 975) {
-//		setVx(-getX());
-//	}
-//	
-	//if(getY() > 420 || getY() < -50) {
-	//	setVy(-getY());
-	//}
-	
-	
-	
+ 
 	
 	public Game() {
 		JFrame f = new JFrame("Duck Hunt");
@@ -110,6 +99,18 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		f.addMouseListener(this);
 		f.addKeyListener(this);
 		f.setUndecorated(true);
+		
+		//platforms setup
+		platforms = new ArrayList<Level>();
+		platforms.add(firstlevel);
+		platforms.add(secondlevel);
+		platforms.add(fourthlevel);
+		platforms.add(thirdlevel);
+		platforms.add(fifthlevel);
+		platforms.add(toplevel);
+		m = new Mario(platforms);
+		ba = new Barrel(platforms); // the barrels that try to kill Mario
+		
 		Timer t = new Timer(1, this);
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -161,7 +162,16 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		int key = e.getKeyCode();
 		
 		if(key == KeyEvent.VK_W) { //up
-			m.setVy(-20);
+			
+		/*	if(m.hitBox().intersects(L.hitBox())) {
+				m.climb();
+				m.climbing = true;
+			}else if(m.getVy()==0) {
+				m.setVy(-10);
+				m.climbing = false;
+			} */
+			m.jump();
+			
 		} else if (key == KeyEvent.VK_S) { //goes down
 			m.setVx(0);
 		} else if (key == KeyEvent.VK_A) { //left
@@ -184,8 +194,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		} else if (key == KeyEvent.VK_A) {// stops moving
 			m.setVx(0);
 		} else if (key == KeyEvent.VK_D) { //stops moving
-			m.setVx(0);
-			
+			m.setVx(0);	
 		}
 	}
 
@@ -193,7 +202,6 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		repaint();
-		m.update();
 	}
 	
 	

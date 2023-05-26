@@ -2,6 +2,7 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -10,8 +11,8 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 
-public class DonkeyKongg{
-	private int x= 50, y = 140; //position of the bird
+public class Luigi{
+	private int x= 300, y = 860; //position of mario
 	private Image img;
 	private AffineTransform tx;
 	private int Vy;
@@ -22,8 +23,8 @@ public class DonkeyKongg{
 	
 	//add the no-argument (zero parameters) constructor)
 	
-	public DonkeyKongg(){
-		img = getImage("/imgs/donkeytrans.png"); //load the image for Tree
+	public Luigi(){
+		img = getImage("/imgs/luigi.png"); //load the image for mario
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x,y); 				//initialize the location of the image
 									//use your variables
@@ -45,10 +46,32 @@ public class DonkeyKongg{
 		init(x, y);
 		
 		
+		vy++;
+		if (y > 900) {
+			y = 900;
+		}
+		
+		
+		//make certain coordinates so when mario hits it, he bounces back up
+		//increase velocity y bdy 1
+		//set velocity y to 25daa
+		init(x,y);
 		g2.drawImage(img, tx, null);
 		//g2.drawRect(x,y, 50, 50);
 		
 		
+	}
+	public boolean hitbox(Rectangle M) {
+		Rectangle platform1 = new Rectangle(getX() + 900, getY() + 950, 942, 975);
+		
+		Rectangle M1 = new Rectangle(getX()+70, getY()+70, 190, 190);
+		
+		if(M1.intersects(platform1)) {
+			setVx(0);
+			setVy(0);
+			return true;
+		}
+		return false;
 	}
 	
 	public double getVy() {
@@ -90,7 +113,7 @@ public class DonkeyKongg{
 
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(.8, .8);
+		tx.scale(5, 5);
 	}
 
 	private Image getImage(String path) {

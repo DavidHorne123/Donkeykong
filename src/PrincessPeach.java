@@ -53,7 +53,7 @@ public class PrincessPeach {
 		//try catch is there to be able to define the image class to be tested for errors while it is being executed
 		Image tempImage = null;
 		try {
-			URL imageURL = barrel.class.getResource(path);
+			URL imageURL = Barrel.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();
