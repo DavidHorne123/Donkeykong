@@ -10,15 +10,15 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 
-public class Ladder {
+public class Ladder3 {
 	private int x , y; //position of the bird
 	private Image img;
 	private AffineTransform tx;
 	
 	//add the no-argument (zero parameters) constructor)
 	
-	public Ladder(int x, int y){
-		img = getImage("/imgs/Ladder.png"); //load the image for Tree
+	public Ladder3(int x, int y){
+		img = getImage("/imgs/ladder3.png"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x,y); 				//initialize the location of the image
 									//use your variables
@@ -29,8 +29,8 @@ public class Ladder {
 	//add the 1-argument constructor - to set the fileName
 	//of the image to use
 	
-	public Ladder(String fileName) {
-		img = getImage("/imgs/Ladder.png"+ fileName); //load the image for Tree
+	public Ladder3(String fileName) {
+		img = getImage("/imgs/ladder3.png"+ fileName); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(0, 0);			//initialize the location of the image
 									//use your variables
@@ -46,11 +46,11 @@ public class Ladder {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, tx, null);
 		g.setColor(Color.blue);
-	//	g.drawRect(x, y, 100, 150);
+		g.drawRect(x, y, 50, 100);
 	}
 	
 	public Rectangle hitBox() {
-		return new Rectangle(x,y, 100, 150);
+		return new Rectangle(x,y, 50, 100);
 	}
 	
 	private void init(double a, double b) {

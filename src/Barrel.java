@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 
 
-public class Barrel{
+public class Barrel extends Barrels{
 	
-	private int x,y; // position of the bird
+	private int x  ,y ; // position of the bird
 	private double vx=2, vy; // for movement
 	int count;
 	private Image img; 	
@@ -71,6 +71,7 @@ public class Barrel{
 				break;
 			 
 			}
+		
 			
 		}
 		
@@ -80,7 +81,12 @@ public class Barrel{
 			y += vy;
 		}
 		
-
+		if( x > 900) {
+			vx = -5;
+		}
+		if( x < 0) {
+			vx= 5;
+		}
 		x += vx;
 	
 		// make certain coordinates so when mario hits it, he bounces back up
@@ -88,24 +94,24 @@ public class Barrel{
 		// set velocity y to 25daa
 		init(x, y);
 		g2.drawImage(img, tx, null);
-		g2.drawRect(x+25,y+25, 50, 50);
+		g2.drawRect(x+42,y+50, 20, 20);
 
 	}
 	
-	private Rectangle hitBox() {
+	public Rectangle hitBox() {
 		// TODO Auto-generated method stub
-		return new Rectangle(x+25,y+25, 50, 50);
+		return new Rectangle(x+20,y+25, 40, 40);
 
 	}
 
 	private void update() {
 		tx.setToTranslation(getX(), getY());
-		tx.scale(3 ,3);
+		tx.scale(4 ,4);
 	}
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(1,1);
+		tx.scale(1, 1);
 	}
 
 

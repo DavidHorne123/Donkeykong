@@ -18,7 +18,7 @@ public class toplevel extends Level{
 	public toplevel(){
 		img = getImage("/imgs/level.png"); //load the image for Tree
 		x = -125; // possition for left side floor
-		y = 275;
+		y = 250;
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x,y);
 	}

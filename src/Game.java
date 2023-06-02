@@ -2,6 +2,7 @@ import java.awt.Color;
 
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -15,22 +16,39 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class Game extends JPanel implements KeyListener, MouseListener, ActionListener{
-	int score = 0; //created score variable
-	int highscore = 0; //created highscore variable which should go at the top middle of the screen
-	int Lives = 10; //Mario has lives
-	int hit; //the variable for when the barrels hit mario
 	
 	
 	public int keyright = KeyEvent.VK_RIGHT;
 	public int keyleft = KeyEvent.VK_LEFT;
 	int velX = 0, velY = 0; //need this for the methods below
 	
-	public int characterheight = 36;
-	public int characterwidth = 24;
-	public int fallingframe = 0;
-	public int fallingSpeed = 1;
+
 	public boolean falling = false;
 	public boolean running = true;
 	public boolean climb = false;
@@ -41,13 +59,29 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	
 	
 	Mario m;
-	//Background bigFrame = new Background();
+	Background Background = new Background();
 	//Duck duck = new Duck();
 	PrincessPeach p = new PrincessPeach(); //Princess Peach
 	DonkeyKongg d = new DonkeyKongg(); // Donkey Kong
-	Ladder L = new Ladder(800, 845); //the ladders that allows Mario to advancew
-	Ladder L2 = new Ladder(100, 730);
-	//Ladder L2 = new Ladder();
+	Ladder L = new Ladder(800, 875); //the ladders that allows Mario to advancew
+	Ladder L2 = new Ladder(100, 730); //ladder 2
+	Ladder L3 = new Ladder(800, 580); //Ladder 3
+	Ladder L4 = new Ladder(100, 430);
+	Ladder L5 = new Ladder(800, 280);
+	
+	public int Score= 500;
+	//int HighScore;
+	
+	int pastScore; 
+	int HighScore1 = 0; 
+
+	
+
+	//the higher the number, the lower the object goes
+	//the lower the number, the higher the object goes
+	//lower number goes left
+	//higher number goes right
+	
 	Barrel ba;
 	firstlevel firstlevel = new firstlevel();
 	secondlevel secondlevel = new secondlevel();
@@ -56,6 +90,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	fifthlevel fifthlevel = new fifthlevel();
 	toplevel toplevel = new toplevel();
 	
+	ArrayList<Ladders> ladders;
 	ArrayList<Level> platforms;
 	private String img;
 	
@@ -66,19 +101,55 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		d.paint(g); //painting donkey kong
 		p.paint(g);
 		m.paint(g); //painting mario
-		ba.paint(g); //painting Donkey Kong
+		ba.paint(g); //painting barrel
+		
+		boolean touching = false;
+		if( m.hitBox().intersects(ba.hitBox())) {
+			g.setColor(Color.BLACK);
+			HighScore1 = Score; 
+			Font myFont = new Font ("Courier New", 1, 50);
+			
+			g.setColor(Color.RED);
+			g.setFont(myFont);
+			g.drawString("GAMEOVER ",  500, 500); // firgure out how to freeze game
+			ba.getX();
+			ba.getY();
+			ba.setX(getX());
+			ba.setY(getY());
+			
+			Score =0;  // reset score
+			
+		}
+	Font myFont = new Font ("Courier New", 1, 50);
+		
+		g.setColor(Color.RED);
+		g.setFont(myFont);
+		g.drawString("HiGH SCORE: " + HighScore1 ,   400, 40);
+		g.drawString("Score : " + Score ,  0, 50);
+		
+		
+		g.setColor(Color.white);
+		g.drawString("00000 " , 400, 80); // highschore
+		
+		
+		
 		
 		firstlevel.paint(g); //painting the first platform
-		secondlevel.paint(g);
-		fourthlevel.paint(g);
-		thirdlevel.paint(g);
-		fifthlevel.paint(g);
+		secondlevel.paint(g); //painting the second platform
+		fourthlevel.paint(g); //painting the fourth platform
+		thirdlevel.paint(g); //painting the third platform
+		fifthlevel.paint(g); //painting the fifth platform
 		toplevel.paint(g);
+		
 		L.paint(g); //the ladder
-		L2.paint(g);
+		L2.paint(g); //second ladder
+		L3.paint(g); //third ladder
+		L4.paint(g); //fourth ladder
+		L5.paint(g); //fifth ladder
 
 		
 	}
+	
 	
 
 	
@@ -90,15 +161,25 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
  
 	
 	public Game() {
-		JFrame f = new JFrame("Duck Hunt");
+		JFrame f = new JFrame("DK");
 		f.setSize(new Dimension(1022, 1022));
-		f.setBackground(Color.blue);
+		f.setBackground(Color.black);
 		f.add(this);
 		f.setResizable(false);
 		f.setLayout(new GridLayout(1,2));
 		f.addMouseListener(this);
 		f.addKeyListener(this);
 		f.setUndecorated(true);
+		
+	
+		//Ladders setup
+		
+		ladders = new ArrayList<Ladders>();
+		Ladders.add(L);
+		Ladders.add(L2);
+		Ladders.add(L3);
+		Ladders.add(L4);
+		Ladders.add(L5);
 		
 		//platforms setup
 		platforms = new ArrayList<Level>();
@@ -160,18 +241,14 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	public void keyPressed(KeyEvent e) {  //We worked really hard in order to make Mario move
 		// TODO Auto-generated method stub
 		int key = e.getKeyCode();
+		if(m.hitBox().intersects(L.hitBox()) || m.hitBox().intersects(L2.hitBox()) || m.hitBox().intersects(L3.hitBox()) || m.hitBox().intersects(L4.hitBox()) || m.hitBox().intersects(L5.hitBox()))  {
+			m.climb();
+			img = getImage("/imgs/MarioClimbing.png");
+			System.out.print("climbing");
+		}
 		
 		if(key == KeyEvent.VK_W) { //up
-			
-		/*	if(m.hitBox().intersects(L.hitBox())) {
-				m.climb();
-				m.climbing = true;
-			}else if(m.getVy()==0) {
-				m.setVy(-10);
-				m.climbing = false;
-			} */
 			m.jump();
-			
 		} else if (key == KeyEvent.VK_S) { //goes down
 			m.setVx(0);
 		} else if (key == KeyEvent.VK_A) { //left
@@ -182,16 +259,21 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		}
 	}
 
+	private String getImage(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		int key = e.getKeyCode();
 		
-		if(key == KeyEvent.VK_W) { //stops moving
-			//m.setVy(0);
-		} else if (key == KeyEvent.VK_S) { //stops moving 
-			m.setVy(1);
-		} else if (key == KeyEvent.VK_A) {// stops moving
+			
+		if (key == KeyEvent.VK_A) {// stops moving
 			m.setVx(0);
 		} else if (key == KeyEvent.VK_D) { //stops moving
 			m.setVx(0);	

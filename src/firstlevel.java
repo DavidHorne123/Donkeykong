@@ -19,7 +19,7 @@ public class firstlevel extends Level{
 	public firstlevel(){
 		img = getImage("/imgs/level.png"); //load the image for Tree
 		x = 25; // possition for left side floor
-		y = 970;
+		y = 1000;
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x,y);
 	}

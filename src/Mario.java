@@ -16,10 +16,9 @@ import java.util.ArrayList;
  *
  */
 public class Mario {
-	private int x = 500, y = 0; // position of mario
+	private int x = 500, y = 900; // position of mario
 	private Image img;
 	private AffineTransform tx;
-	private int Vy;
 	private int ay; //gravity
 	private double vx;
 	private double vy;
@@ -52,24 +51,21 @@ public class Mario {
 		int count = 0;
 		for( Level level : platforms ) {
 			
-			if(level.hitbox().intersects(this.hitBox()) && vy >= 0 ) {
+			if(level.hitbox().intersects(this.hitBox()) && vy > 0) {
 				ay = 0;
 				vy = 0;
 				onPlatform = true;
-				System.out.println("on platform");
 				count++;
 				break;
-			 
 			}
 			
 		}
 		
-		if(count==0) {
+		 if(!onPlatform) {
 			ay = 1;	
 			vy += ay; //acceleration affects velocity
 			y += vy;
-		}
-		
+		 }
 
 		x += vx;
 	
@@ -127,7 +123,7 @@ public class Mario {
 	}
 
 	public void jump() {
-		if(vy == 0) {
+		if( onPlatform) {
 			vy = -10;
 			onPlatform = false;
 		}
