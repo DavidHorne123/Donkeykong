@@ -9,7 +9,7 @@ public class Level {
 
 	public int width = 1000;
 	public int height = 50;
-	protected int x, y; //position of the bird
+	protected int x, y; //position 
 	protected Image img;
 	protected AffineTransform tx;
 	

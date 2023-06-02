@@ -69,20 +69,24 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	Ladder L4 = new Ladder(100, 430);
 	Ladder L5 = new Ladder(800, 280);
 	
-	public int Score= 500;
+	public int Score= 0;
 	//int HighScore;
 	
 	int pastScore; 
 	int HighScore1 = 0; 
-
 	
+	//SOUNDS
+	Music m1 = new Music("jump.wav", false);
 
 	//the higher the number, the lower the object goes
 	//the lower the number, the higher the object goes
 	//lower number goes left
 	//higher number goes right
 	
-	Barrel ba;
+	//BARRELS
+	Barrel b1;
+	Barrel b2;
+	
 	firstlevel firstlevel = new firstlevel();
 	secondlevel secondlevel = new secondlevel();
 	fourthlevel fourthlevel = new fourthlevel();
@@ -101,10 +105,12 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		d.paint(g); //painting donkey kong
 		p.paint(g);
 		m.paint(g); //painting mario
-		ba.paint(g); //painting barrel
+		b1.paint(g); //painting barrel
+		//b2.paint(g);
 		
 		boolean touching = false;
-		if( m.hitBox().intersects(ba.hitBox())) {
+		if( m.hitBox().intersects(b1.hitBox()))
+		{
 			g.setColor(Color.BLACK);
 			HighScore1 = Score; 
 			Font myFont = new Font ("Courier New", 1, 50);
@@ -112,14 +118,21 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			g.setColor(Color.RED);
 			g.setFont(myFont);
 			g.drawString("GAMEOVER ",  500, 500); // firgure out how to freeze game
-			ba.getX();
-			ba.getY();
-			ba.setX(getX());
-			ba.setY(getY());
-			
+			b1.getX();
+			b1.getY();
+			b1.setX(getX());
+			b1.setY(getY());
+			m.getX();
+			m.getY();
 			Score =0;  // reset score
-			
+		
 		}
+		
+		
+		
+		
+		
+
 	Font myFont = new Font ("Courier New", 1, 50);
 		
 		g.setColor(Color.RED);
@@ -190,7 +203,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		platforms.add(fifthlevel);
 		platforms.add(toplevel);
 		m = new Mario(platforms);
-		ba = new Barrel(platforms); // the barrels that try to kill Mario
+		b1 = new Barrel(platforms); // the barrels that try to kill Mario
 		
 		Timer t = new Timer(1, this);
 		t.start();
@@ -249,6 +262,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		
 		if(key == KeyEvent.VK_W) { //up
 			m.jump();
+			m1.play();
 		} else if (key == KeyEvent.VK_S) { //goes down
 			m.setVx(0);
 		} else if (key == KeyEvent.VK_A) { //left

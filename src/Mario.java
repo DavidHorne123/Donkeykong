@@ -26,6 +26,7 @@ public class Mario {
 	public int setvelX;
 	public boolean climbing = false;
 	ArrayList<Level> platforms;
+	boolean onPlatform = false;
 	
 	// add the no-argument (zero parameters) constructor)
 
@@ -42,7 +43,7 @@ public class Mario {
 		init(0, 0);
 	}
 
-	boolean onPlatform = false;
+	
 	public void paint(Graphics g) {
 		// these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
@@ -79,7 +80,8 @@ public class Mario {
 	}
 
 	public void climb(){
-		y -= 5;
+		y -= 10;
+		ay = 0;
 		init(x,y);
 		System.out.println("climb");
 	}

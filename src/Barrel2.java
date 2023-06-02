@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 
 
-public class Barrel extends Barrels{
+public class Barrel2 extends Barrels{
 	
-	private int x  ,y ; // position of the bird
+	private int x = 0  ,y = 200; // position of the bird
 	private double vx=2, vy; // for movement
 	int count;
 	private Image img; 	
@@ -23,8 +23,8 @@ public class Barrel extends Barrels{
 	private boolean onPlatform;
 	private ArrayList<Level> platforms;
 
-	
-	public Barrel(ArrayList<Level> platforms) {
+
+	public Barrel2(ArrayList<Level> platforms) {
 		img = getImage("/imgs/barrel.png"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(getX(), getY());
 		init(getX(), getY()); 				//initialize the location of the image
@@ -35,7 +35,7 @@ public class Barrel extends Barrels{
 	
 	//include a constructor that allows the specifying the file name
 	// of the image
-	public Barrel(String fileName) {
+	public Barrel2(String fileName) {
 		img = getImage("/imgs/"+fileName); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(getX(), getY());
 		init(getX(), getY()); 				//initialize the location of the image
@@ -58,8 +58,6 @@ public class Barrel extends Barrels{
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
-		tx.setToTranslation(getX(), getY());
-		tx.scale(5 ,5);
 		/* check for platform collisions which determins if we're moving down */
 		int count = 0;
 		for( Level level : platforms ) {
@@ -96,19 +94,19 @@ public class Barrel extends Barrels{
 		// set velocity y to 25daa
 		init(x, y);
 		g2.drawImage(img, tx, null);
-	//	g2.drawRect(x+42,y+50, 20, 20);
-		update();
+		g2.drawRect(x+42,y+50, 20, 20);
+
 	}
 	
 	public Rectangle hitBox() {
 		// TODO Auto-generated method stub
-		return new Rectangle(x+42,y+50, 20, 20);
+		return new Rectangle(x+20,y+25, 40, 40);
 
 	}
 
 	private void update() {
 		tx.setToTranslation(getX(), getY());
-		tx.scale(5 ,5);
+		tx.scale(4 ,4);
 	}
 	
 	private void init(double a, double b) {
