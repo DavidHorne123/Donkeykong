@@ -56,11 +56,13 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	public boolean left = false;
 	public boolean right = false;
 	boolean gamestart = false;
+	private int lives = 1; //changeback for testing
 	
 	
 	Mario m;
 	Background Background = new Background();
 	//Duck duck = new Duck();
+	
 	PrincessPeach p = new PrincessPeach(); //Princess Peach
 	DonkeyKongg d = new DonkeyKongg(); // Donkey Kong
 	Ladder L = new Ladder(800, 875); //the ladders that allows Mario to advancew
@@ -94,39 +96,51 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	fifthlevel fifthlevel = new fifthlevel();
 	toplevel toplevel = new toplevel();
 	
+	GameOver Black = new GameOver();
 	ArrayList<Ladders> ladders;
 	ArrayList<Level> platforms;
 	private String img;
 	
+	
+
+	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		//bigFrame.paint(g); //painging the giant background
-	
+		g.setColor(Color.black);
+		g.fillRect(200, 200, 10000000, 1000000);
+		
 		d.paint(g); //painting donkey kong
 		p.paint(g);
 		m.paint(g); //painting mario
 		b1.paint(g); //painting barrel
 		//b2.paint(g);
 		
+			
+			
+			
+		
 		boolean touching = false;
+		
 		if( m.hitBox().intersects(b1.hitBox()))
 		{
-			g.setColor(Color.BLACK);
 			HighScore1 = Score; 
 			Font myFont = new Font ("Courier New", 1, 50);
 			
-			g.setColor(Color.RED);
-			g.setFont(myFont);
-			g.drawString("GAMEOVER ",  500, 500); // firgure out how to freeze game
+			lives --;
 			b1.getX();
 			b1.getY();
 			b1.setX(getX());
 			b1.setY(getY());
-			m.getX();
-			m.getY();
-			Score =0;  // reset score
-		
+			
+			if (lives ==0 ) {
+				
+				Black.paint(g);
+				
+			}
 		}
+		
+		
 		
 		
 		
@@ -140,9 +154,13 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		g.drawString("HiGH SCORE: " + HighScore1 ,   400, 40);
 		g.drawString("Score : " + Score ,  0, 50);
 		
+		//lives
+		g.setColor(Color.RED);
+		g.setFont(myFont);
+		g.drawString("LIVES LEFT: " + lives ,   400, 100);
 		
-		g.setColor(Color.white);
-		g.drawString("00000 " , 400, 80); // highschore
+		
+		
 		
 		
 		
@@ -169,6 +187,9 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	
 	public static void main(String[] arg) {
 		Game g = new Game();
+		
+		
+	
 	}
 	
  
