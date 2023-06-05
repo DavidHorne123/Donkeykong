@@ -16,9 +16,9 @@ public class PrincessPeach {
 	//add the no-argument (zero parameters) constructor)
 	
 	public PrincessPeach(){
-		img = getImage("/imgs/peachFaceLeft.zip"); //load the image for Tree
+		img = getImage("/imgs/princesspeach.png"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y);
-		init(200, 50); 				//initialize the location of the image
+		init(150, 60); 				//initialize the location of the image
 									//use your variables
 	}
 	
@@ -26,7 +26,7 @@ public class PrincessPeach {
 	//of the image to use
 	
 	public PrincessPeach(String fileName) {
-		img = getImage("/imgs/peachFaceLeft.zip"+ fileName); //load the image for Tree
+		img = getImage("/imgs/princesspeach.png"+ fileName); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(0, 0);			//initialize the location of the image
 									//use your variables
@@ -45,7 +45,7 @@ public class PrincessPeach {
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(4, 4); //scaling image to fit on the screen. the pixels
+		tx.scale(1, 1); //scaling image to fit on the screen. the pixels
 						//for this image are much smaller allowing me to scale it over one unlike background img
 	}
 

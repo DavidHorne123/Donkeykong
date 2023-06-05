@@ -56,9 +56,9 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	public boolean left = false;
 	public boolean right = false;
 	boolean gamestart = false;
-	private int lives = 1; //changeback for testing
+	public int lives = 3; //changeback for testing
 	
-	
+	Luigi l;
 	Mario m;
 	Background Background = new Background();
 	
@@ -116,6 +116,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		d.paint(g); //painting donkey kong
 		p.paint(g);
 		m.paint(g); //painting mario
+		l.paint(g);;
 		b1.paint(g); //painting barrel
 		//b2.paint(g);
 		
@@ -229,6 +230,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		platforms.add(fifthlevel);
 		platforms.add(toplevel);
 		m = new Mario(platforms);
+		l = new Luigi(platforms);
 		b1 = new Barrel(platforms); // the barrels that try to kill Mario
 		
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -297,6 +299,25 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			m.setVx(2);
 			
 		}
+		if(l.hitBox().intersects(L.hitBox()) || l.hitBox().intersects(L2.hitBox()) || l.hitBox().intersects(L3.hitBox()) || l.hitBox().intersects(L4.hitBox()) || l.hitBox().intersects(L5.hitBox()))  {
+			l.climb();
+			
+			img = getImage("/imgs/MarioClimbing.png");
+			System.out.print("climbing");
+		}
+		
+		if(key == KeyEvent.VK_I) { //up
+			l.jump();
+			jump.play();
+			//m1.play();
+		} else if (key == KeyEvent.VK_K) { //goes down
+			l.setVx(0);
+		} else if (key == KeyEvent.VK_J) { //left
+			l.setVx(-2);
+		} else if (key == KeyEvent.VK_L) { //right
+			l.setVx(2);
+			
+		}
 	}
 
 	private String getImage(String string) {
@@ -318,6 +339,12 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		} else if (key == KeyEvent.VK_D) { //stops moving
 			m.setVx(0);	
 		}
+		if (key == KeyEvent.VK_J) { //stops moving
+		l.setVx(0);
+	} else if (key == KeyEvent.VK_L) { //stops moving
+		l.setVx(0);
+		
+	}
 	}
 
 	@Override

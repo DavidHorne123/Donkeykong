@@ -27,6 +27,11 @@ public class DonkeyKongg{
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x,y); 				//initialize the location of the image
 									//use your variables
+		while(getVx() == 0) {
+			setVx((int)((Math.random()*2) - 3));
+		}
+		
+		
 	
 	}
 
@@ -43,7 +48,13 @@ public class DonkeyKongg{
 		x += vx;
 		y += vy;
 		init(x, y);
+		setX((int) (getX()+ getVx()));
+		setY((int) (getY()+ getVy()));
 		
+		if(getX() > 440 || getX() < -10) {
+			setVx(-getVx());
+		}
+	
 		
 		g2.drawImage(img, tx, null);
 		//g2.drawRect(x,y, 50, 50);
