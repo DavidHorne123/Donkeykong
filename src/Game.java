@@ -52,6 +52,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	public boolean falling = false;
 	public boolean running = true;
 	public boolean climb = false;
+	public boolean dead = false;
 	
 	public boolean left = false;
 	public boolean right = false;
@@ -126,23 +127,44 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		
 		boolean touching = false;
 		
-		if( m.hitBox().intersects(b1.hitBox()))
+		if( m.hitBox().intersects(b1.hitBox()) || l.hitBox().intersects(b1.hitBox()) )
 		{
 			HighScore1 = Score; 
 			Font myFont = new Font ("Courier New", 1, 50);
 			
 			lives --;
+			Score =-100;
 			b1.getX();
 			b1.getY();
 			b1.setX(getX());
 			b1.setY(getY());
 			
-			if (lives ==0 ) {
-				
-				
-				
+			if(l.getY() > b1.getY()) {
+				Score +=100;
 			}
+			if(m.getX() == b1.getX() && m.getY() > b1.getY()) {
+				Score += 500;
+			}
+			
+			if (lives ==0 && m.getY() < 800 || l.getY() < 800) {
+				m.setY(-80);
+				l.setY(-80);
+				dead = true;
+			}
+			
+			if(dead == true) {
+				Font nigr = new Font ("Courier New", 5, 50);
+				g.setFont(nigr);
+				g.setColor(Color.RED);
+				g.drawString("YOU LOST NIGGGA LOLLL " ,   400, 300);
+			}
+			
 		}
+		if(b1.getX() <= 30 && b1.getY() >= 900) {
+			b1.setY(0);
+			
+		}
+		
 		
 		
 		

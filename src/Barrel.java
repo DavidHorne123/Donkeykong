@@ -89,6 +89,12 @@ public class Barrel extends Barrels{
 		if( x < 0) {
 			vx= 5;
 		}
+		if( x <= 900 && x >=950) {
+			getX();
+			getY();
+			setX(getX());
+			setY(getY());
+		}
 		x += vx;
 	
 		// make certain coordinates so when mario hits it, he bounces back up
