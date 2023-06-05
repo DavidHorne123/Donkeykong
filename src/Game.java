@@ -61,12 +61,14 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	boolean win = false;
 	public int lives = 3; //changeback for testing
 	
-	Luigi l;
-	Mario m;
+	
+	PrincessPeach p = new PrincessPeach(); //Princess Peach
+	Luigi l; //Luigi object
+	Mario m; //Mario object
 	Background Background = new Background();
 	
 	
-	PrincessPeach p = new PrincessPeach(); //Princess Peach
+	
 	DonkeyKongg d = new DonkeyKongg(); // Donkey Kong
 	Ladder L = new Ladder(800, 875); //the ladders that allows Mario to advancew
 	Ladder L2 = new Ladder(100, 730); //ladder 2
@@ -77,6 +79,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	//music
 	Music m1 = new Music("bacmusic.wav", true);
 	Music jump = new Music("jump.wav", false);
+	//Music Oof = new Music("oof.wav", false);
 	
 	public int Score= 0;
 	//int HighScore;
@@ -135,24 +138,26 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			Font myFont = new Font ("Courier New", 1, 100);
 			
 			
-			if(dead == true) {
-				Font nigr = new Font ("Courier New", 5, 50);
-				g.setFont(nigr);
-				g.setColor(Color.RED);
-				g.drawString("YOU LOST LOLLL " ,   400, 300);
-			}
+			
 			
 		}
 		if(b1.getX() <= 30 && b1.getY() >= 900) {
 			b1.setY(0);
 			
 		}
+		
+		if(l.getX() == b1.getX() && l.getY() < b1.getY()) {
+			Score += 500;
+		}
+		
+		if(m.getX() == b1.getX() && m.getY() < b1.getY()) {
+			Score += 500;
+		}
 		//when mario or luigi touch peach
 		//then they win
-		if( m.hitBox().intersects(p.hitBox()) || l.hitBox().intersects(p.hitBox()) ){
+		if( m.hitBox().intersects(p.hitBox())){
 			win = true;
-			
-			System.out.println("LLL");
+			gameOver = false;
 		}
 		if(win == true) {
 			
@@ -164,9 +169,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			g.setFont(over);
 			g.setColor(Color.red);
 			g.drawString("YOU WON", 225, 550);
-		}
-	
-		
+		}	
 		
 		
 		
@@ -190,7 +193,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		g.setColor(Color.RED);
 		g.setFont(myFont);
 		g.drawString("HiGH SCORE: " + HighScore1 ,   400, 40);
-		g.drawString("Score : " + Score ,  0, 50);
+		g.drawString("Score : " + Score ,  0, 40);
 		
 		//lives
 		g.setColor(Color.RED);
@@ -223,21 +226,26 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		
 		if( m.hitBox().intersects(b1.hitBox()) || l.hitBox().intersects(b1.hitBox()) )
 		{
-			HighScore1 = Score; 
 			
+		//	Oof.play();
 			lives --;
 			b1.getX();
 			b1.getY();
 			b1.setX(getX());
 			b1.setY(getY());
-			
 			if(l.getX() == b1.getX() && l.getY() > b1.getY()) {
 				Score += 500;
-			}
-			if(m.getX() == b1.getX() && m.getY() > b1.getY()) {
-				Score += 500;
+				HighScore1+= Score;
 			}
 			
+			if(m.getX() == b1.getX() && m.getY() > b1.getY()) {
+				Score += 500;
+				HighScore1+= Score;
+			}
+			if( m.hitBox().intersects(p.hitBox())){
+				win = true;
+				gameOver = false;
+			}
 			if (lives <= 0 ) {
 				
 				m.setY(2000);
@@ -247,6 +255,9 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			}
 			
 		}
+		
+		
+		
 		
 		
 	}
@@ -354,7 +365,6 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		if(key == KeyEvent.VK_W) { //up
 			m.jump();
 			jump.play();
-			//m1.play();
 		} else if (key == KeyEvent.VK_S) { //goes down
 			m.setVx(0);
 		} else if (key == KeyEvent.VK_A) { //left
@@ -366,14 +376,13 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		if(l.hitBox().intersects(L.hitBox()) || l.hitBox().intersects(L2.hitBox()) || l.hitBox().intersects(L3.hitBox()) || l.hitBox().intersects(L4.hitBox()) || l.hitBox().intersects(L5.hitBox()))  {
 			l.climb();
 			
-			img = getImage("/imgs/MarioClimbing.png");
+			img = getImage("/imgs/luigi.png");
 			//System.out.print("climbing");
 		}
 		
 		if(key == KeyEvent.VK_I) { //up
 			l.jump();
 			jump.play();
-			//m1.play();
 		} else if (key == KeyEvent.VK_K) { //goes down
 			l.setVx(0);
 		} else if (key == KeyEvent.VK_J) { //left
