@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -40,7 +41,11 @@ public class PrincessPeach {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, tx, null);
+		g2.drawRect(x+180,y+80, 100, 135);
 
+	}
+	public Rectangle hitBox() {
+		return new Rectangle(x+25,y+25, 50, 50);
 	}
 	
 	private void init(double a, double b) {

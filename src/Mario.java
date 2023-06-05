@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  */
 public class Mario {
-	private int x = 500, y = 910; // position of mario
+	private int x = 500, y = 0; // position of mario
 	private Image img;
 	private AffineTransform tx;
 	private int ay; //gravity
@@ -83,7 +83,7 @@ public class Mario {
 		y -= 10;
 		ay = 0;
 		init(x,y);
-		System.out.println("climb");
+	//	System.out.println("climb");
 	}
 	
 	

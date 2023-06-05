@@ -83,7 +83,7 @@ public class Luigi {
 		y -= 10;
 		ay = 0;
 		init(x,y);
-		System.out.println("climb");
+		//System.out.println("climb");
 	}
 	
 	

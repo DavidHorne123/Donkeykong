@@ -58,6 +58,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	public boolean left = false;
 	public boolean right = false;
 	boolean gamestart = false;
+	boolean win = false;
 	public int lives = 3; //changeback for testing
 	
 	Luigi l;
@@ -146,6 +147,27 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			b1.setY(0);
 			
 		}
+		//when mario or luigi touch peach
+		//then they win
+		if( m.hitBox().intersects(p.hitBox()) || l.hitBox().intersects(p.hitBox()) ){
+			win = true;
+			
+			System.out.println("LLL");
+		}
+		if(win == true) {
+			
+			
+			g.setColor(Color.black); //makes screen black
+			g.drawRect(0,0,2000,2000);
+			g.fillRect(0,0,2000,2000);
+			
+			g.setFont(over);
+			g.setColor(Color.red);
+			g.drawString("YOU WON", 225, 550);
+		}
+	
+		
+		
 		
 		
 		if(gameOver == true) {
@@ -326,7 +348,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			m.climb();
 			
 			img = getImage("/imgs/MarioClimbing.png");
-			System.out.print("climbing");
+			//System.out.print("climbing");
 		}
 		
 		if(key == KeyEvent.VK_W) { //up
@@ -345,7 +367,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			l.climb();
 			
 			img = getImage("/imgs/MarioClimbing.png");
-			System.out.print("climbing");
+			//System.out.print("climbing");
 		}
 		
 		if(key == KeyEvent.VK_I) { //up

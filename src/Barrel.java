@@ -68,7 +68,7 @@ public class Barrel extends Barrels{
 				ay = 0;
 				vy = 0;
 				onPlatform = true;
-				System.out.println("on platform");
+		//		System.out.println("on platform");
 				count++;
 				break;
 			 
