@@ -61,7 +61,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	
 	Mario m;
 	Background Background = new Background();
-	//Duck duck = new Duck();
+	
 	
 	PrincessPeach p = new PrincessPeach(); //Princess Peach
 	DonkeyKongg d = new DonkeyKongg(); // Donkey Kong
@@ -71,14 +71,18 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	Ladder L4 = new Ladder(100, 430);
 	Ladder L5 = new Ladder(800, 280);
 	
+	//music
+	Music m1 = new Music("bacmusic.wav", true);
+	Music jump = new Music("jump.wav", false);
+	
 	public int Score= 0;
 	//int HighScore;
 	
 	int pastScore; 
 	int HighScore1 = 0; 
 	
-	//SOUNDS
-	Music m1 = new Music("jump.wav", false);
+	
+	
 
 	//the higher the number, the lower the object goes
 	//the lower the number, the higher the object goes
@@ -107,8 +111,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		//bigFrame.paint(g); //painging the giant background
-		g.setColor(Color.black);
-		g.fillRect(200, 200, 10000000, 1000000);
+		
 		
 		d.paint(g); //painting donkey kong
 		p.paint(g);
@@ -135,7 +138,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			
 			if (lives ==0 ) {
 				
-				Black.paint(g);
+				
 				
 			}
 		}
@@ -204,7 +207,9 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		f.addMouseListener(this);
 		f.addKeyListener(this);
 		f.setUndecorated(true);
-		
+		Timer t = new Timer(1, this);
+		t.start();
+		m1.play();
 	
 		//Ladders setup
 		
@@ -226,8 +231,6 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		m = new Mario(platforms);
 		b1 = new Barrel(platforms); // the barrels that try to kill Mario
 		
-		Timer t = new Timer(1, this);
-		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);	
 	}
@@ -277,13 +280,15 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		int key = e.getKeyCode();
 		if(m.hitBox().intersects(L.hitBox()) || m.hitBox().intersects(L2.hitBox()) || m.hitBox().intersects(L3.hitBox()) || m.hitBox().intersects(L4.hitBox()) || m.hitBox().intersects(L5.hitBox()))  {
 			m.climb();
+			
 			img = getImage("/imgs/MarioClimbing.png");
 			System.out.print("climbing");
 		}
 		
 		if(key == KeyEvent.VK_W) { //up
 			m.jump();
-			m1.play();
+			jump.play();
+			//m1.play();
 		} else if (key == KeyEvent.VK_S) { //goes down
 			m.setVx(0);
 		} else if (key == KeyEvent.VK_A) { //left
