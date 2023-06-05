@@ -75,7 +75,7 @@ public class Mario {
 		// set velocity y to 25daa
 		init(x, y);
 		g2.drawImage(img, tx, null);
-	//	g2.drawRect(x+25,y+25, 50, 50);
+		//g2.drawRect(x+25,y+25, 50, 50);
 
 	}
 

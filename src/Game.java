@@ -53,6 +53,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	public boolean running = true;
 	public boolean climb = false;
 	public boolean dead = false;
+	public boolean gameOver=false;
 	
 	public boolean left = false;
 	public boolean right = false;
@@ -117,46 +118,27 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		d.paint(g); //painting donkey kong
 		p.paint(g);
 		m.paint(g); //painting mario
-		l.paint(g);;
+		l.paint(g);
 		b1.paint(g); //painting barrel
 		//b2.paint(g);
 		
 			
 			
-			
+			Font over = new Font("Copperplate", Font.BOLD, 100);
 		
 		boolean touching = false;
 		
 		if( m.hitBox().intersects(b1.hitBox()) || l.hitBox().intersects(b1.hitBox()) )
 		{
 			HighScore1 = Score; 
-			Font myFont = new Font ("Courier New", 1, 50);
+			Font myFont = new Font ("Courier New", 1, 100);
 			
-			lives --;
-			Score =-100;
-			b1.getX();
-			b1.getY();
-			b1.setX(getX());
-			b1.setY(getY());
-			
-			if(l.getY() > b1.getY()) {
-				Score +=100;
-			}
-			if(m.getX() == b1.getX() && m.getY() > b1.getY()) {
-				Score += 500;
-			}
-			
-			if (lives ==0 && m.getY() < 800 || l.getY() < 800) {
-				m.setY(-80);
-				l.setY(-80);
-				dead = true;
-			}
 			
 			if(dead == true) {
 				Font nigr = new Font ("Courier New", 5, 50);
 				g.setFont(nigr);
 				g.setColor(Color.RED);
-				g.drawString("YOU LOST NIGGGA LOLLL " ,   400, 300);
+				g.drawString("YOU LOST LOLLL " ,   400, 300);
 			}
 			
 		}
@@ -166,8 +148,16 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		}
 		
 		
-		
-		
+		if(gameOver == true) {
+			
+			g.setColor(Color.black); //makes screen black
+			g.drawRect(0,0,2000,2000);
+			g.fillRect(0,0,2000,2000);
+			
+			g.setFont(over);
+			g.setColor(Color.red);
+			g.drawString("GAME OVER", 225, 550);
+		}
 		
 		
 		
@@ -204,10 +194,40 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		L4.paint(g); //fourth ladder
 		L5.paint(g); //fifth ladder
 
-		
+		mechanics();
 	}
 	
-	
+	public void mechanics() {
+		
+		if( m.hitBox().intersects(b1.hitBox()) || l.hitBox().intersects(b1.hitBox()) )
+		{
+			HighScore1 = Score; 
+			
+			lives --;
+			b1.getX();
+			b1.getY();
+			b1.setX(getX());
+			b1.setY(getY());
+			
+			if(l.getX() == b1.getX() && l.getY() > b1.getY()) {
+				Score += 500;
+			}
+			if(m.getX() == b1.getX() && m.getY() > b1.getY()) {
+				Score += 500;
+			}
+			
+			if (lives <= 0 ) {
+				
+				m.setY(2000);
+				l.setY(2000);
+				dead = true;
+				gameOver= true;
+			}
+			
+		}
+		
+		
+	}
 
 	
 	
