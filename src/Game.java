@@ -58,8 +58,9 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	public boolean left = false;
 	public boolean right = false;
 	boolean gamestart = false;
-	boolean win = false;
-	public int lives = 3; //changeback for testing
+	public boolean win = false;
+	public int lives = 10; 
+	
 	
 	
 	PrincessPeach p = new PrincessPeach(); //Princess Peach
@@ -124,7 +125,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		m.paint(g); //painting mario
 		l.paint(g);
 		b1.paint(g); //painting barrel
-		//b2.paint(g);
+		
 		
 			
 			
@@ -137,41 +138,37 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			HighScore1 = Score; 
 			Font myFont = new Font ("Courier New", 1, 100);
 			
-			
-			
-			
 		}
 		if(b1.getX() <= 30 && b1.getY() >= 900) {
 			b1.setY(0);
 			
 		}
 		
-		if(l.getX() == b1.getX() && l.getY() < b1.getY()) {
+		if(l.getX() == b1.getX() && l.getY() > b1.getY()) {
 			Score += 500;
-		}
-		
-		if(m.getX() == b1.getX() && m.getY() < b1.getY()) {
+		}else 
+		if(m.getX() == b1.getX() && m.getY() > b1.getY()) {
 			Score += 500;
 		}
 		//when mario or luigi touch peach
 		//then they win
+		
+		
 		if( m.hitBox().intersects(p.hitBox())){
-			win = true;
+			//win = true;
 			gameOver = false;
+			win = true;
 		}
-		if(win == true) {
-			
-			
+		
+		if (win == true ) {
 			g.setColor(Color.black); //makes screen black
 			g.drawRect(0,0,2000,2000);
 			g.fillRect(0,0,2000,2000);
-			
+				
 			g.setFont(over);
-			g.setColor(Color.red);
-			g.drawString("YOU WON", 225, 550);
-		}	
-		
-		
+			g.setColor(Color.green);
+			g.drawString("YOU WON!!", 225, 550);
+		}
 		
 		if(gameOver == true) {
 			
@@ -183,11 +180,9 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			g.setColor(Color.red);
 			g.drawString("GAME OVER", 225, 550);
 		}
+			
+	
 		
-		
-		
-		
-
 	Font myFont = new Font ("Courier New", 1, 50);
 		
 		g.setColor(Color.RED);
@@ -199,11 +194,6 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		g.setColor(Color.RED);
 		g.setFont(myFont);
 		g.drawString("LIVES LEFT: " + lives ,   400, 100);
-		
-		
-		
-		
-		
 		
 		
 		firstlevel.paint(g); //painting the first platform
@@ -233,6 +223,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			b1.getY();
 			b1.setX(getX());
 			b1.setY(getY());
+			
 			if(l.getX() == b1.getX() && l.getY() > b1.getY()) {
 				Score += 500;
 				HighScore1+= Score;
@@ -242,10 +233,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 				Score += 500;
 				HighScore1+= Score;
 			}
-			if( m.hitBox().intersects(p.hitBox())){
-				win = true;
-				gameOver = false;
-			}
+			
 			if (lives <= 0 ) {
 				
 				m.setY(2000);
@@ -253,12 +241,13 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 				dead = true;
 				gameOver= true;
 			}
+			if( m.hitBox().intersects(p.hitBox())){
+				//win = true;
+				gameOver = false;
+				win = true;
+			}
 			
 		}
-		
-		
-		
-		
 		
 	}
 
@@ -267,7 +256,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	public static void main(String[] arg) {
 		Game g = new Game();
 		
-		
+		//
 	
 	}
 	
