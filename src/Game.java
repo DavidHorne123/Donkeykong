@@ -69,13 +69,12 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	Background Background = new Background();
 	
 	
-	
 	DonkeyKongg d = new DonkeyKongg(); // Donkey Kong
-	Ladder L = new Ladder(800, 875); //the ladders that allows Mario to advancew
+	Ladder L = new Ladder(800, 875); //the ladders that allows Mario to advance
 	Ladder L2 = new Ladder(100, 730); //ladder 2
 	Ladder L3 = new Ladder(800, 580); //Ladder 3
-	Ladder L4 = new Ladder(100, 430);
-	Ladder L5 = new Ladder(800, 280);
+	Ladder L4 = new Ladder(100, 430); // Ladder 4
+	Ladder L5 = new Ladder(800, 280); // Ladder 5
 	
 	//music
 	Music m1 = new Music("bacmusic.wav", true);
@@ -88,9 +87,6 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	int pastScore; 
 	int HighScore1 = 0; 
 	
-	
-	
-
 	//the higher the number, the lower the object goes
 	//the lower the number, the higher the object goes
 	//lower number goes left
@@ -113,8 +109,6 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	private String img;
 	
 	
-
-	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		//bigFrame.paint(g); //painging the giant background
@@ -123,13 +117,11 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		d.paint(g); //painting donkey kong
 		p.paint(g);
 		m.paint(g); //painting mario
-		l.paint(g);
+		l.paint(g); // painting luigi
 		b1.paint(g); //painting barrel
 		
 		
-			
-			
-			Font over = new Font("Copperplate", Font.BOLD, 100);
+		Font over = new Font("Copperplate", Font.BOLD, 100);
 		
 		boolean touching = false;
 		
@@ -256,7 +248,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	public static void main(String[] arg) {
 		Game g = new Game();
 		
-		//
+		
 	
 	}
 	
