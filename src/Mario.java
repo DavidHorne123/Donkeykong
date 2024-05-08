@@ -27,6 +27,8 @@ public class Mario {
 	public boolean climbing = false;
 	ArrayList<Level> platforms;
 	boolean onPlatform = false;
+	 
+	
 	
 	// add the no-argument (zero parameters) constructor)
 
