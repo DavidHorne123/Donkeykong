@@ -43,7 +43,6 @@ import javax.swing.Timer;
 
 public class Game extends JPanel implements KeyListener, MouseListener, ActionListener{
 	
-	
 	public int keyright = KeyEvent.VK_RIGHT;
 	public int keyleft = KeyEvent.VK_LEFT;
 	int velX = 0, velY = 0; //need this for the methods below
