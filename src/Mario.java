@@ -27,8 +27,6 @@ public class Mario {
 	public boolean climbing = false;
 	ArrayList<Level> platforms;
 	boolean onPlatform = false;
-	 
-	
 	
 	
 	
