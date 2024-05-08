@@ -31,6 +31,7 @@ public class Mario {
 	
 	
 	
+	
 	// add the no-argument (zero parameters) constructor)
 
 	public Mario(ArrayList<Level> platforms) {
