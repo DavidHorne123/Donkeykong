@@ -239,11 +239,8 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 				dead = true;
 				gameOver= true;
 			}
-			if( m.hitBox().intersects(p.hitBox())){
-				//win = true;
-				gameOver = false;
-				win = true;
-			}
+			
+			
 				// set mario back to where he started
 				m.setX(500);
 				m.setY(900);
@@ -252,12 +249,22 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 				l.setX(900);
 				l.setY(900);
 			
-		}
+			}
 		
 		
-	}
-
 	
+	if( m.hitBox().intersects(p.hitBox())) {
+		
+		
+		gameOver = false;
+		win = true;
+	}else 
+		if(l.hitBox().intersects(p.hitBox()))
+			{
+			gameOver = false;
+			win = true;
+		}
+	}
 	
 	public static void main(String[] arg) {
 		Game g = new Game();
@@ -359,6 +366,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		
 		if(key == KeyEvent.VK_W) { //up
 			m.jump();
+			
 			jump.play();
 		} else if (key == KeyEvent.VK_S) { //goes down
 			m.setVx(0);
