@@ -40,7 +40,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
+// BY: DAVID HORNE
 public class Game extends JPanel implements KeyListener, MouseListener, ActionListener{
 	
 	public int keyright = KeyEvent.VK_RIGHT;

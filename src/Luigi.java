@@ -11,12 +11,11 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.ArrayList;
 
-/**
- * @author 1902983
- *
- */
+//BY: DAVID HORNE
+
 public class Luigi {
-	private int x = 900, y = 910; // position of mario
+	//luigi's x was 900 and y was 910
+	private int x = 700, y = 50; // position of mario
 	private Image img;
 	private AffineTransform tx;
 	private int ay; //gravity
@@ -126,7 +125,7 @@ public class Luigi {
 
 	public void jump() {
 		if( onPlatform) {
-			vy = -10;
+			vy = -11;
 			onPlatform = false;
 		}
 	}

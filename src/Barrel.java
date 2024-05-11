@@ -40,13 +40,7 @@ public class Barrel extends Barrels{
 		tx = AffineTransform.getTranslateInstance(getX(), getY());
 		init(getX(), getY()); 				//initialize the location of the image
 									//use your variables
-		
-		//give duck a random non-zero velocitu between -3 and 3
-		//in both x and y directions
-		
-		
-		
-		
+	
 		
 	}
 	
@@ -102,12 +96,12 @@ public class Barrel extends Barrels{
 		// set velocity y to 25daa
 		init(x, y);
 		g2.drawImage(img, tx, null);
-	//	g2.drawRect(x+42,y+50, 20, 20);
+		g2.drawRect(x+42,y+50, 20, 20);
 		update();
 	}
 	
 	public Rectangle hitBox() {
-		// TODO Auto-generated method stub
+		//(x, y, width, height)
 		return new Rectangle(x+42,y+50, 20, 20);
 
 	}

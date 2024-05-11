@@ -11,10 +11,9 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.ArrayList;
 
-/**
- * @author 1902983
- *
- */
+//BY: DAVID HORNE
+
+ 
 public class Mario {
 	private int x = 500, y = 910; // position of mario
 	private Image img;
@@ -127,7 +126,7 @@ public class Mario {
 
 	public void jump() {
 		if( onPlatform) {
-			vy = -10;
+			vy = -11;
 			onPlatform = false;
 		}
 	}

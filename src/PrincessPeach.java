@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
+//BY: DAVID HORNE
 
 
 public class PrincessPeach {
@@ -41,11 +42,11 @@ public class PrincessPeach {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, tx, null);
-		g2.drawRect(x+200,y+120, 100, 135);
+		//g2.drawRect(x+200,y+120, 100, 135);
 
 	}
 	public Rectangle hitBox() {
-		return new Rectangle(x+100,y+100, 50, 50);
+		return new Rectangle(x+200,y+120, 100, 135);
 	}
 	
 	private void init(double a, double b) {
