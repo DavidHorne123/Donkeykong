@@ -93,7 +93,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	
 	//BARRELS
 	Barrel b1;
-	Barrel b2;
+	//Barrel b2;
 	
 	firstlevel firstlevel = new firstlevel();
 	secondlevel secondlevel = new secondlevel();
@@ -215,11 +215,18 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			b1.setX(getX());
 			b1.setY(getY());
 			
+			// if luigi's x position equals the barrel's x position
+			// and luigi's y position is greater than the barrel's y position
+			// score increases by an increment of 500
+			// and highscore is the new score
 			if(l.getX() == b1.getX() && l.getY() > b1.getY()) {
 				Score += 500;
 				HighScore1+= Score;
 			}
-			
+			// if mario's x position equals the barrel's x position
+			// and mario's y position is greater than the barrel's y position
+			// score increases by an increment of 500
+			// and highscore is the new score
 			if(m.getX() == b1.getX() && m.getY() > b1.getY()) {
 				Score += 500;
 				HighScore1+= Score;
@@ -237,8 +244,16 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 				gameOver = false;
 				win = true;
 			}
+				// set mario back to where he started
+				m.setX(500);
+				m.setY(900);
+				
+				//set luigi back to where he started
+				l.setX(900);
+				l.setY(900);
 			
 		}
+		
 		
 	}
 

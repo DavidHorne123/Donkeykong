@@ -29,12 +29,7 @@ public class Ladder3 {
 	//add the 1-argument constructor - to set the fileName
 	//of the image to use
 	
-	public Ladder3(String fileName) {
-		img = getImage("/imgs/ladder3.png"+ fileName); //load the image for Tree
-		tx = AffineTransform.getTranslateInstance(x, y);
-		init(0, 0);			//initialize the location of the image
-									//use your variables
-	}
+	
 	
 	public void changePicture(String newFileName) {
 		img = getImage(newFileName);
