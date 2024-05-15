@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Barrel extends Barrels{
 	
-	private int x  ,y ; // position of the bird
+	private int x  ,y ; // position of the barrel
 	private double vx=2, vy; // for movement
 	int count;
 	private Image img; 	

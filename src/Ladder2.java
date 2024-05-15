@@ -26,8 +26,7 @@ public class Ladder2 {
 		this.y = y;
 	}
 	
-	//add the 1-argument constructor - to set the fileName
-	//of the image to use
+	
 	
 
 	

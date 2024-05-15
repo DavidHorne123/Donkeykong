@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Barrel2 extends Barrels{
 	
-	private int x = 0  ,y = 200; // position of the bird
+	private int x = 0  ,y = 200; // position of the barrel
 	private double vx=2, vy; // for movement
 	int count;
 	private Image img; 	
@@ -40,11 +40,6 @@ public class Barrel2 extends Barrels{
 		tx = AffineTransform.getTranslateInstance(getX(), getY());
 		init(getX(), getY()); 				//initialize the location of the image
 									//use your variables
-		
-		//give duck a random non-zero velocitu between -3 and 3
-		//in both x and y directions
-		
-		
 		
 		
 		

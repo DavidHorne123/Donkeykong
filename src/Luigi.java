@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Luigi {
 	//luigi's x was 900 and y was 910
-	private int x = 700, y = 50; // position of mario
+	private int x = 900, y = 910; // position of luigi
 	private Image img;
 	private AffineTransform tx;
 	private int ay; //gravity

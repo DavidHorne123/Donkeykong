@@ -61,12 +61,12 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	public int lives = 10; 
 	
 	
+	// Creating objects
 	
 	PrincessPeach p = new PrincessPeach(); //Princess Peach
 	Luigi l; //Luigi object
 	Mario m; //Mario object
 	Background Background = new Background();
-	
 	
 	DonkeyKongg d = new DonkeyKongg(); // Donkey Kong
 	Ladder L = new Ladder(800, 875); //the ladders that allows Mario to advance
@@ -75,7 +75,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	Ladder L4 = new Ladder(100, 430); // Ladder 4
 	Ladder L5 = new Ladder(800, 280); // Ladder 5
 	
-	//music
+	//music objects
 	Music m1 = new Music("bacmusic.wav", true);
 	Music jump = new Music("jump.wav", false);
 	//Music Oof = new Music("oof.wav", false);
