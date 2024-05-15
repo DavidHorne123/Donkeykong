@@ -11,12 +11,12 @@ import java.net.URL;
 
 
 public class Ladder5 {
-	private int x , y; //position of the bird
+	private int x , y; //position of the ladder
 	private Image img;
 	private AffineTransform tx;
 	
-	//add the no-argument (zero parameters) constructor)
 	
+	// constructor that contains the image used
 	public Ladder5(int x, int y){
 		img = getImage("/imgs/Ladder5.png"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y);
@@ -29,13 +29,12 @@ public class Ladder5 {
 	//add the 1-argument constructor - to set the fileName
 	//of the image to use
 	
-
-	
 	public void changePicture(String newFileName) {
 		img = getImage(newFileName);
 		init(0, 0);
 	}
 	
+	// paint method
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
@@ -52,7 +51,8 @@ public class Ladder5 {
 		tx.setToTranslation(a, b);
 		tx.scale(1.8, 1.8);
 	}
-
+	
+	// getting the image that we used with a try catch exception
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
