@@ -86,6 +86,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	int pastScore; 
 	int HighScore1 = 0; 
 	
+	// Notes for positions of objects and where to place them
 	//the higher the number, the lower the object goes
 	//the lower the number, the higher the object goes
 	//lower number goes left
@@ -94,6 +95,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	//BARRELS
 	Barrel b1;
 	//Barrel b2;
+
 	
 	firstlevel firstlevel = new firstlevel();
 	secondlevel secondlevel = new secondlevel();
@@ -114,7 +116,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		
 		
 		d.paint(g); //painting donkey kong
-		p.paint(g);
+		p.paint(g); // painting princess peach
 		m.paint(g); //painting mario
 		l.paint(g); // painting luigi
 		b1.paint(g); //painting barrel
@@ -161,6 +163,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			g.drawString("YOU WON!!", 225, 550);
 		}
 		
+		// If the game is over
 		if(gameOver == true) {
 			
 			g.setColor(Color.black); //makes screen black
@@ -274,7 +277,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	}
 	
  
-	
+	// Game constructor with no parameters 
 	public Game() {
 		JFrame f = new JFrame("DK");
 		f.setSize(new Dimension(1022, 1022));

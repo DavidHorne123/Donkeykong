@@ -11,11 +11,11 @@ import java.net.URL;
 
 
 public class Ladder3 {
-	private int x , y; //position of the bird
+	private int x , y; //position of the ladder
 	private Image img;
 	private AffineTransform tx;
 	
-	//add the no-argument (zero parameters) constructor)
+	
 	
 	public Ladder3(int x, int y){
 		img = getImage("/imgs/ladder3.png"); //load the image for Tree
