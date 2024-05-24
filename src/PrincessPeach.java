@@ -27,12 +27,12 @@ public class PrincessPeach {
 	//add the 1-argument constructor - to set the fileName
 	//of the image to use
 	
-	public PrincessPeach(String fileName) {
-		img = getImage("/imgs/princesspeach.png"+ fileName); //load the image for Tree
-		tx = AffineTransform.getTranslateInstance(x, y);
-		init(0, 0);			//initialize the location of the image
+	//public PrincessPeach(String fileName) {
+		//img = getImage("/imgs/princesspeach.png"+ fileName); //load the image for Tree
+		//tx = AffineTransform.getTranslateInstance(x, y);
+		//init(0, 0);			//initialize the location of the image
 									//use your variables
-	}
+	//}
 	public void changePicture(String newFileName) {
 		img = getImage(newFileName);
 		init(0, 0);

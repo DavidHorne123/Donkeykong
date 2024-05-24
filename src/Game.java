@@ -41,22 +41,26 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 // BY: DAVID HORNE
+
 public class Game extends JPanel implements KeyListener, MouseListener, ActionListener{
-	
+// The Game class is the main class which created objects
+	// includes the paint method
+	// includes the win and game over condition
+	// includes mario and luigi's movement as well
 	public int keyright = KeyEvent.VK_RIGHT;
 	public int keyleft = KeyEvent.VK_LEFT;
 	int velX = 0, velY = 0; //need this for the methods below
 	
+	// Declaring variables
+	
 
-	public boolean falling = false;
-	public boolean running = true;
 	public boolean climb = false;
 	public boolean dead = false;
 	public boolean gameOver=false;
 	
 	public boolean left = false;
 	public boolean right = false;
-	boolean gamestart = false;
+	
 	public boolean win = false;
 	public int lives = 10; 
 	
@@ -81,7 +85,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 	//Music Oof = new Music("oof.wav", false);
 	
 	public int Score= 0;
-	//int HighScore;
+	
 	
 	int pastScore; 
 	int HighScore1 = 0; 
@@ -126,17 +130,25 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		
 		boolean touching = false;
 		
+		// If mario's hitbox touches the barrel's hitbox 
+		// or if luigi's hitbox touches the barrel's hitbox then change highscore1 to score
+		// the highscore becomes the new score
 		if( m.hitBox().intersects(b1.hitBox()) || l.hitBox().intersects(b1.hitBox()) )
 		{
 			HighScore1 = Score; 
 			Font myFont = new Font ("Courier New", 1, 100);
-			
+		
+		
 		}
+		// if barrel's x coordinate is less than or equal to 30 and the barrel's Y 
+		// coordinate is greater than or equal to 900 then set Y back to zero
+		// if the barrel reaches the end it goes back to the top
 		if(b1.getX() <= 30 && b1.getY() >= 900) {
 			b1.setY(0);
 			
 		}
-		
+		// if mario and luigi jump above the barrel then score increases
+		// by 500
 		if(l.getX() == b1.getX() && l.getY() > b1.getY()) {
 			Score += 500;
 		}else 
@@ -147,12 +159,12 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		//then they win
 		
 		
-		if( m.hitBox().intersects(p.hitBox())){
+		//if( m.hitBox().intersects(p.hitBox())){
+			
+			//gameOver = false;
 			//win = true;
-			gameOver = false;
-			win = true;
-		}
-		
+		//}
+		// for the win screen
 		if (win == true ) {
 			g.setColor(Color.black); //makes screen black
 			g.drawRect(0,0,2000,2000);
@@ -255,7 +267,8 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			}
 		
 		
-	
+	// if mario or Luigi touch princess peach then 
+	// a winscreen is shown
 	if( m.hitBox().intersects(p.hitBox())) {
 		
 		
@@ -268,7 +281,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 			win = true;
 		}
 	}
-	
+	// main method in the game class
 	public static void main(String[] arg) {
 		Game g = new Game();
 		
@@ -302,7 +315,10 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		Ladders.add(L5);
 		
 		//platforms setup
+		// Initialize the platforms list
 		platforms = new ArrayList<Level>();
+		
+		// Add individual Level objects to the list
 		platforms.add(firstlevel);
 		platforms.add(secondlevel);
 		platforms.add(fourthlevel);
@@ -363,7 +379,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, ActionLi
 		if(m.hitBox().intersects(L.hitBox()) || m.hitBox().intersects(L2.hitBox()) || m.hitBox().intersects(L3.hitBox()) || m.hitBox().intersects(L4.hitBox()) || m.hitBox().intersects(L5.hitBox()))  {
 			m.climb();
 			
-			img = getImage("/imgs/MarioClimbing.png");
+			img = getImage("/imgs/MarioFaceRight.png");
 			//System.out.print("climbing");
 		}
 		

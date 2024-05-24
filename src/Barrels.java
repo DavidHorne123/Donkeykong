@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
+//BY: DAVID HORNE
 
 public class Barrels {
 	private int x,y; // position of the bird
@@ -19,12 +20,11 @@ public class Barrels {
 		setY((int) (getY()+ getVy()));
 		
 		if( x > 800) {
-			vx = -15;
-		}
-		
-		if( x < 0) {
-			vx= 15;
-		}
+            vx = -15;
+        }
+        else {
+            vx= 15;
+        }
 		
 		
 		x += vx;
@@ -33,8 +33,8 @@ public class Barrels {
 		update();
 		g2.drawImage(img, tx, null);
 		
-		//whenevr x reaches border
-		//m,ultiply vx by -1
+		//whenever x reaches border
+		//multiply vx by -1
 		
 
 		

@@ -12,6 +12,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 //BY: DAVID HORNE
+// the mario class is responsible for Mario's X and Y position and getting his image
+// and also creating many different velocity x and y variables 
 
  
 public class Mario {
@@ -28,7 +30,7 @@ public class Mario {
 	boolean onPlatform = false;
 	
 	
-	// add the no-argument (zero parameters) constructor)
+	
 
 	public Mario(ArrayList<Level> platforms) {
 		img = getImage("/imgs/MarioFaceRight.png"); // load the image for mario
@@ -48,7 +50,7 @@ public class Mario {
 		// these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 
-		/* check for platform collisions which determins if we're moving down */
+		/* check for platform collisions which determines if we're moving down */
 		int count = 0;
 		for( Level level : platforms ) {
 			
@@ -71,8 +73,8 @@ public class Mario {
 		x += vx;
 	
 		// make certain coordinates so when mario hits it, he bounces back up
-		// increase velocity y bdy 1
-		// set velocity y to 25daa
+		// increase velocity by 1
+		// set velocity y to 25d
 		init(x, y);
 		g2.drawImage(img, tx, null);
 		//g2.drawRect(x+25,y+25, 50, 50);
@@ -89,37 +91,47 @@ public class Mario {
 	
 	public Rectangle hitBox() {
 		return new Rectangle(x+25,y+25, 50, 50);
+		
 	}
-
+	
+	// GETTERS AND SETTERS
+	
+	// This method returns the current horizontal velocity
+	// vx of Mario
 	public double getVx() {
 		return vx;
 	}
-
+	// This method sets the horizontal velocity 
+	// vx of Mario
 	public void setVx(double vx) {
 		this.vx = vx;
 	}
 	
+	// This method sets the current vertical velocity 
+	// vy of Mario
 	public void setVy(double vy) {
 		this.vy= vy;
 	}
-
+	
+	// This method returns the current horizontal position x of Mario
 	public int getX() {
 		return x;
 	}
-
+	// This method returns the current vertical velocity vy of Mario
 	public double getVy() {
 		return vy;
 	}
 	
-	
+	// This method sets the horizontal position x of Mario
 	public void setX(int x) {
 		this.x = x;
 	}
-
+	// This method returns the current vertical position Y of mario 
 	public int getY() {
 		return y;
 	}
-
+	// This method sets the vertical position y of Mario and 
+	// int y is the new vertical position to set
 	public void setY(int y) {
 		this.y = y;
 	}
@@ -133,9 +145,9 @@ public class Mario {
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(.2, .2);
+		tx.scale(.2, .2); // Making mario smaller by .2
 	}
-
+	// try catch block method for getting mario's image
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {

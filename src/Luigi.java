@@ -13,10 +13,13 @@ import java.util.ArrayList;
 
 //BY: DAVID HORNE
 
+//the Luigi class is responsible for Luigi's X and Y position and getting his image
+//and also creating many different velocity x and y variables 
+
 public class Luigi {
-	//luigi's x was 900 and y was 910
+	
 	private int x = 900, y = 910; // position of luigi
-	private Image img;
+	private Image img; // image
 	private AffineTransform tx;
 	private int ay; //gravity
 	private double vx;
@@ -47,7 +50,7 @@ public class Luigi {
 		// these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 
-		/* check for platform collisions which determins if we're moving down */
+		/* check for platform collisions which determines if we're moving down */
 		int count = 0;
 		for( Level level : platforms ) {
 			
@@ -89,36 +92,39 @@ public class Luigi {
 	public Rectangle hitBox() {
 		return new Rectangle(x+20,y+20, 45, 45);
 	}
-
+	
+	// This method returns the current horizontal velocity of Luigi
 	public double getVx() {
 		return vx;
 	}
-
+	
+	// This method sets the horizontal velocity vx of Luigi
 	public void setVx(double vx) {
 		this.vx = vx;
 	}
 	
+	// This method sets the vertical velocity of Luigi
 	public void setVy(double vy) {
 		this.vy= vy;
 	}
-
+	// This method returns the horizontal position x of the object
 	public int getX() {
 		return x;
 	}
-
+	// This method returns the current vertical velocity vy of Luigi
 	public double getVy() {
 		return vy;
 	}
 	
-	
+	// This method sets the horizontal position x of Luigi
 	public void setX(int x) {
 		this.x = x;
 	}
-
+	// This method returns the current vertical Y position of Luigi
 	public int getY() {
 		return y;
 	}
-
+	// This method sets the vertical position of Y 
 	public void setY(int y) {
 		this.y = y;
 	}
@@ -132,9 +138,9 @@ public class Luigi {
 	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(3.4, 3.4);
+		tx.scale(3.4, 3.4); // resizing Luigi
 	}
-
+	// try catch block method for getting luigi's image
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {

@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.ArrayList;
+//BY: DAVID HORNE
 
 
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class Barrel extends Barrels{
 	
 	private int x  ,y ; // position of the barrel
-	private double vx=2, vy; // for movement
+	private double vx =2, vy; // for movement
 	int count;
 	private Image img; 	
 	private AffineTransform tx;
@@ -35,14 +36,14 @@ public class Barrel extends Barrels{
 	
 	//include a constructor that allows the specifying the file name
 	// of the image
-	public Barrel(String fileName) {
-		img = getImage("/imgs/"+fileName); //load the image for Tree
-		tx = AffineTransform.getTranslateInstance(getX(), getY());
-		init(getX(), getY()); 				//initialize the location of the image
+	//public Barrel(String fileName) {
+		//img = getImage("/imgs/"+fileName); //load the image for Tree
+		//tx = AffineTransform.getTranslateInstance(getX(), getY());
+		//init(getX(), getY()); 				//initialize the location of the image
 									//use your variables
 	
 		
-	}
+	//}
 	
 	public void changePicture(String newFileName) {
 		img = getImage(newFileName);
@@ -108,7 +109,7 @@ public class Barrel extends Barrels{
 
 	private void update() {
 		tx.setToTranslation(getX(), getY());
-		tx.scale(5 ,5);
+		tx.scale(5 ,5); 
 	}
 	
 	private void init(double a, double b) {
@@ -116,7 +117,7 @@ public class Barrel extends Barrels{
 		tx.scale(1, 1);
 	}
 
-
+	
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
